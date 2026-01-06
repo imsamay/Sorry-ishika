@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorry Surprise 💗</title>
+<title>Magical Surprise 💗</title>
 <style>
 body, html{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',sans-serif;}
 section{height:100vh;width:100%;display:flex;justify-content:center;align-items:center;flex-direction:column;position:relative;text-align:center;}
@@ -23,7 +23,7 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 /* ---------- PAGE 2 ---------- */
 #page2{background:#ffe4e1;display:none;overflow:hidden;}
 #thanksMsg{font-size:2em;margin-top:25px;color:#333;display:none;}
-#sorryMsg{font-size:2em;margin-top:15px;color:#333;}
+#msg{font-size:1.8em;margin-top:15px;color:#333;}
 
 /* button */
 #forgiveBtn{margin-top:20px;padding:12px 28px;font-size:1.1em;background:#ff69b4;color:white;border:none;border-radius:10px;cursor:pointer;transition:0.3s;}
@@ -62,7 +62,7 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 
 <!-- PAGE 2 -->
 <section id="page2">
-  <div id="sorryMsg">I'm sorry 😔❤️😻</div>
+  <div id="msg">Allow me this much to tell u ...<br>In the sky crowded with stars, U remain the only moon. I see..___ 😅🤍</div>
   <button id="forgiveBtn" onclick="startMagic()">Click Me!</button>
 
   <div class="dance-row" style="display:none;">
@@ -88,8 +88,8 @@ function gotoPage2(){
 function startMagic(){
   document.getElementById("forgiveBtn").style.display="none";
 
-  // hide sorry message after showing once
-  setTimeout(()=>{ document.getElementById("sorryMsg").style.display="none"; }, 1500);
+  // hide initial message after showing once
+  setTimeout(()=>{ document.getElementById("msg").style.display="none"; }, 2500);
 
   // show dancing cats
   document.querySelector(".dance-row").style.display="flex";
@@ -114,7 +114,7 @@ function startMagic(){
   }
 
   // show thank you after short delay
-  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; }, 2000);
+  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; }, 2500);
 }
 </script>
 
