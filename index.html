@@ -21,23 +21,18 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 .cat-emoji:hover{transform:scale(1.4);}
 
 /* PAGE 2 */
-#page2{background:#ffe4e1;display:none;overflow:hidden;position:relative;}
+#page2{background:#ffe4e1;display:none;flex-direction:column;justify-content:center;align-items:center;}
+#sorryMsg{font-size:2em;margin-top:10px;color:#333;position:relative;z-index:1;}
+#clickBtn{margin-top:20px;padding:12px 28px;font-size:1.1em;background:#ff69b4;color:white;border:none;border-radius:10px;cursor:pointer;transition:0.3s;position:relative;z-index:1;}
+#clickBtn:hover{background:#ff1493;}
+
+/* PAGE 3 */
+#page3{display:none;position:relative;width:100%;height:100vh;background:#111;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;color:white;text-align:center;}
+#moon{font-size:4em;position:absolute;top:10%;left:50%;transform:translateX(-50%);}
 #starsBackground{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
-.star{position:absolute;color:#fff;font-size:1em;animation:twinkle 2s infinite;}
-@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
-.moon{position:absolute;font-size:3em;top:5%;right:10%;}
-
-/* Messages */
-#sorryMsg{font-size:2em;margin-top:10px;color:#333;z-index:1;position:relative;}
-#msg{font-size:1.8em;margin-top:15px;color:#333;display:none;z-index:1;position:relative;}
-#thanksMsg{font-size:2em;margin-top:25px;color:#333;display:none;z-index:1;position:relative;}
-
-/* Button */
-#forgiveBtn{margin-top:20px;padding:12px 28px;font-size:1.1em;background:#ff69b4;color:white;border:none;border-radius:10px;cursor:pointer;transition:0.3s;z-index:1;position:relative;}
-#forgiveBtn:hover{background:#ff1493;}
-
-/* Dancing cats */
-.dance-row{display:flex;justify-content:center;margin-top:25px;display:none;position:relative;z-index:1;}
+#msgPage3{font-size:1.8em;margin-top:15px;position:relative;z-index:1;}
+#thanksMsg{font-size:2em;margin-top:25px;position:relative;z-index:1;}
+.dance-row{display:flex;justify-content:center;margin-top:25px;position:relative;z-index:1;}
 .dance-cat{font-size:3.5em;animation:dance 1s infinite alternate;}
 @keyframes dance{0%{transform:translateY(0);}50%{transform:translateY(-15px);}100%{transform:translateY(0);}}
 
@@ -48,6 +43,9 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 /* butterflies */
 .fly-emoji{position:absolute;font-size:2em;animation:fly 6s infinite;}
 @keyframes fly{0%{transform:translate(0,0);}33%{transform:translate(120px,-40px);}66%{transform:translate(-80px,70px);}100%{transform:translate(0,0);}}
+/* twinkling stars */
+.star{position:absolute;color:#fff;font-size:1em;animation:twinkle 2s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
 </style>
 </head>
 <body>
@@ -69,28 +67,26 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 
 <!-- PAGE 2 -->
 <section id="page2">
-  <!-- Stars & Moon Background -->
-  <div id="starsBackground"></div>
-  <div class="moon">🌙</div>
-
-  <!-- Messages -->
   <div id="sorryMsg">I'm sorry 😔❤️😻</div>
-  <div id="msg">
+  <button id="clickBtn" onclick="gotoPage3()">Click Me!</button>
+</section>
+
+<!-- PAGE 3 -->
+<section id="page3">
+  <div id="starsBackground"></div>
+  <div id="moon">🌕</div>
+
+  <div id="msgPage3">
     Allow me this much to tell u ...<br>
     In the sky crowded with stars, U remain the only moon. I see..___ 😅🤍
   </div>
 
-  <!-- Button -->
-  <button id="forgiveBtn" onclick="startMagic()">Click Me!</button>
-
-  <!-- Dancing Cats -->
   <div class="dance-row">
     <div class="dance-cat">🐈</div>
     <div class="dance-cat">😺</div>
     <div class="dance-cat">😻</div>
   </div>
 
-  <!-- Thank You -->
   <div id="thanksMsg">Thankyou ❤️</div>
 </section>
 
@@ -110,37 +106,31 @@ function generateStars(num){
     star.style.top = Math.random()*100 + "vh";
     star.style.fontSize = (0.5+Math.random()*1.5) + "em";
     star.style.animationDuration = (1+Math.random()*2) + "s";
-    container.appendChild(star);
     star.textContent = "⭐";
+    container.appendChild(star);
   }
 }
 
-generateStars(50);
+generateStars(80);
 
+// Page 1 → Page 2
 function gotoPage2(){
   document.getElementById("page1").style.display="none";
   document.getElementById("page2").style.display="flex";
-
-  // Show first sorry message 2 sec
-  setTimeout(()=>{ document.getElementById("sorryMsg").style.display="none"; },2000);
-
-  // Show main message after 2 sec
-  setTimeout(()=>{ document.getElementById("msg").style.display="block"; },2000);
 }
 
-function startMagic(){
-  document.getElementById("forgiveBtn").style.display="none";
+// Page 2 → Page 3
+function gotoPage3(){
+  document.getElementById("page2").style.display="none";
+  document.getElementById("page3").style.display="flex";
 
-  // show dancing cats
-  document.querySelector(".dance-row").style.display="flex";
-
-  // falling blossoms & flowers
+  // show falling flowers
   for(let i=0;i<15;i++){
     let f = document.createElement("div");
     f.className="fall-emoji";
     f.style.left=Math.random()*100+"vw";
     f.textContent = ["🌸","💐","🍃","🍂"][Math.floor(Math.random()*4)];
-    document.getElementById("page2").appendChild(f);
+    document.getElementById("page3").appendChild(f);
   }
 
   // butterflies
@@ -150,11 +140,11 @@ function startMagic(){
     b.style.top=Math.random()*60+"vh";
     b.style.left=Math.random()*100+"vw";
     b.textContent = "🦋";
-    document.getElementById("page2").appendChild(b);
+    document.getElementById("page3").appendChild(b);
   }
 
-  // show thank you after 2 sec
-  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; },2000);
+  // show thank you after 1.5s
+  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; },1500);
 }
 </script>
 
