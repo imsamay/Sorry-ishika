@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magical Surprise 💗</title>
+<title>Magical Surprise 🌙✨</title>
 <style>
 body, html{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',sans-serif;}
 section{height:100vh;width:100%;display:flex;justify-content:center;align-items:center;flex-direction:column;position:relative;text-align:center;}
 
-/* ---------- PAGE 1 ---------- */
+/* PAGE 1 */
 #page1{background:#ffd6e8;}
 .flowers-emoji{position:absolute;font-size:2.5em;}
 .top-left{top:10px;left:10px;}
@@ -20,17 +20,24 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 .cat-emoji{font-size:4em;margin:0 15px;cursor:pointer;transition:transform .3s;}
 .cat-emoji:hover{transform:scale(1.4);}
 
-/* ---------- PAGE 2 ---------- */
-#page2{background:#ffe4e1;display:none;overflow:hidden;}
-#thanksMsg{font-size:2em;margin-top:25px;color:#333;display:none;}
-#msg{font-size:1.8em;margin-top:15px;color:#333;}
+/* PAGE 2 */
+#page2{background:#ffe4e1;display:none;overflow:hidden;position:relative;}
+#starsBackground{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.star{position:absolute;color:#fff;font-size:1em;animation:twinkle 2s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
+.moon{position:absolute;font-size:3em;top:5%;right:10%;}
 
-/* button */
-#forgiveBtn{margin-top:20px;padding:12px 28px;font-size:1.1em;background:#ff69b4;color:white;border:none;border-radius:10px;cursor:pointer;transition:0.3s;}
+/* Messages */
+#sorryMsg{font-size:2em;margin-top:10px;color:#333;z-index:1;position:relative;}
+#msg{font-size:1.8em;margin-top:15px;color:#333;display:none;z-index:1;position:relative;}
+#thanksMsg{font-size:2em;margin-top:25px;color:#333;display:none;z-index:1;position:relative;}
+
+/* Button */
+#forgiveBtn{margin-top:20px;padding:12px 28px;font-size:1.1em;background:#ff69b4;color:white;border:none;border-radius:10px;cursor:pointer;transition:0.3s;z-index:1;position:relative;}
 #forgiveBtn:hover{background:#ff1493;}
 
-/* dancing cats */
-.dance-row{display:flex;justify-content:center;margin-top:25px;}
+/* Dancing cats */
+.dance-row{display:flex;justify-content:center;margin-top:25px;display:none;position:relative;z-index:1;}
 .dance-cat{font-size:3.5em;animation:dance 1s infinite alternate;}
 @keyframes dance{0%{transform:translateY(0);}50%{transform:translateY(-15px);}100%{transform:translateY(0);}}
 
@@ -62,15 +69,28 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 
 <!-- PAGE 2 -->
 <section id="page2">
-  <div id="msg">Allow me this much to tell u ...<br>In the sky crowded with stars, U remain the only moon. I see..___ 😅🤍</div>
+  <!-- Stars & Moon Background -->
+  <div id="starsBackground"></div>
+  <div class="moon">🌙</div>
+
+  <!-- Messages -->
+  <div id="sorryMsg">I'm sorry 😔❤️😻</div>
+  <div id="msg">
+    Allow me this much to tell u ...<br>
+    In the sky crowded with stars, U remain the only moon. I see..___ 😅🤍
+  </div>
+
+  <!-- Button -->
   <button id="forgiveBtn" onclick="startMagic()">Click Me!</button>
 
-  <div class="dance-row" style="display:none;">
+  <!-- Dancing Cats -->
+  <div class="dance-row">
     <div class="dance-cat">🐈</div>
     <div class="dance-cat">😺</div>
     <div class="dance-cat">😻</div>
   </div>
 
+  <!-- Thank You -->
   <div id="thanksMsg">Thankyou ❤️</div>
 </section>
 
@@ -80,26 +100,46 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 </audio>
 
 <script>
+// Generate random stars
+function generateStars(num){
+  const container = document.getElementById("starsBackground");
+  for(let i=0;i<num;i++){
+    let star = document.createElement("div");
+    star.className="star";
+    star.style.left = Math.random()*100 + "vw";
+    star.style.top = Math.random()*100 + "vh";
+    star.style.fontSize = (0.5+Math.random()*1.5) + "em";
+    star.style.animationDuration = (1+Math.random()*2) + "s";
+    container.appendChild(star);
+    star.textContent = "⭐";
+  }
+}
+
+generateStars(50);
+
 function gotoPage2(){
   document.getElementById("page1").style.display="none";
   document.getElementById("page2").style.display="flex";
+
+  // Show first sorry message 2 sec
+  setTimeout(()=>{ document.getElementById("sorryMsg").style.display="none"; },2000);
+
+  // Show main message after 2 sec
+  setTimeout(()=>{ document.getElementById("msg").style.display="block"; },2000);
 }
 
 function startMagic(){
   document.getElementById("forgiveBtn").style.display="none";
 
-  // hide initial message after showing once
-  setTimeout(()=>{ document.getElementById("msg").style.display="none"; }, 2500);
-
   // show dancing cats
   document.querySelector(".dance-row").style.display="flex";
 
-  // falling emojis
+  // falling blossoms & flowers
   for(let i=0;i<15;i++){
     let f = document.createElement("div");
     f.className="fall-emoji";
     f.style.left=Math.random()*100+"vw";
-    f.textContent = ["🍃","🍂","🌸"][Math.floor(Math.random()*3)];
+    f.textContent = ["🌸","💐","🍃","🍂"][Math.floor(Math.random()*4)];
     document.getElementById("page2").appendChild(f);
   }
 
@@ -113,8 +153,8 @@ function startMagic(){
     document.getElementById("page2").appendChild(b);
   }
 
-  // show thank you after short delay
-  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; }, 2500);
+  // show thank you after 2 sec
+  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; },2000);
 }
 </script>
 
