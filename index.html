@@ -5,124 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sorry Surprise 💗</title>
 <style>
-body, html {
+body, html{
   margin:0;
   padding:0;
+  overflow:hidden;
   font-family: 'Comic Sans MS', cursive;
-  overflow-x:hidden;
-}
-
-section {
-  height:100vh;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  transition: all 0.8s ease;
-  position:relative;
 }
 
 /* ================= PAGE 1 ================= */
 #page1 {
-  background: linear-gradient(#ffc0cb, #ffb6c1);
-  overflow:hidden;
+  height:100vh;
+  width:100%;
+  background: #ffd6e8; /* light pink */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  position:relative;
 }
 
 #page1 .flowers {
   position:absolute;
   width:100%;
   height:100%;
-  background-image:url("https://i.imgur.com/7QpG6pG.png");
-  background-size:cover;
-  opacity:0.2;
+  background-image: url('https://i.imgur.com/7QpG6pG.png'); /* flower image */
+  background-repeat:no-repeat;
+  background-position: top left, top right, bottom left, bottom right;
+  background-size: 100px 100px;
   z-index:0;
+  opacity:0.3;
 }
 
 #page1 .cats {
   display:flex;
+  justify-content:center;
+  align-items:flex-end;
   z-index:2;
-  cursor:pointer;
 }
 
 .cat {
-  margin:15px;
-  transition: transform 0.5s ease;
-  animation: jump 1.5s infinite alternate;
+  margin:0 15px;
+  width:100px;
+  cursor:pointer;
+  transition: transform 0.3s;
 }
 
-.cat:hover { transform:scale(1.3); }
+.cat:hover { transform:scale(1.2); }
 
-@keyframes jump {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+#page1 h2{
+  z-index:2;
+  margin-bottom:20px;
 }
-
-.small { font-size:50px; }
-.medium { font-size:80px; }
-.big { font-size:110px; }
-
-#page1 p { z-index:2; margin-top:20px; font-size:1.2em; }
 
 /* ================= PAGE 2 ================= */
 #page2 {
-  background: radial-gradient(circle at top, #1b2735, #090a0f);
-  color:white;
-  font-size:1.8em;
-  text-align:center;
-  padding:20px;
-  display:none;
-  overflow:hidden;
-}
-
-#page2 .stars {
-  position:absolute;
+  height:100vh;
   width:100%;
-  height:100%;
-  background-image: url("https://i.imgur.com/ya9YdRL.png");
-  background-size:cover;
-  opacity:0.2;
-  z-index:0;
-  animation: twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle {
-  0% { opacity:0.1; }
-  50% { opacity:0.3; }
-  100% { opacity:0.1; }
-}
-
-#page2 p {
-  opacity:0;
-  animation: fadein 2s forwards;
-}
-
-#page2 p:nth-child(1) { animation-delay:0.5s; }
-#page2 p:nth-child(2) { animation-delay:2s; }
-
-@keyframes fadein {
-  to { opacity:1; }
-}
-
-/* ================= PAGE 3 ================= */
-#page3 {
-  background: linear-gradient(#ffe4e1, #ffcccb);
-  text-align:center;
-  font-size:2em;
-  color:#333;
+  background: #ffe4e1;
   display:none;
-  animation: fadepage 1s;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  overflow:hidden;
+  position:relative;
+  text-align:center;
 }
 
-@keyframes fadepage {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-
-/* ================= BUTTONS ================= */
-button {
-  margin-top:30px;
+#page2 h1 { font-size:2em; margin-bottom:20px; }
+#page2 button{
   padding:10px 25px;
   font-size:1em;
   border:none;
@@ -132,7 +82,57 @@ button {
   cursor:pointer;
   transition:0.3s;
 }
-button:hover { background:#ff1493; }
+#page2 button:hover{ background:#ff1493; }
+
+/* ================= Dancing Cats ================= */
+.danceCats {
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
+}
+.danceCat{
+  width:100px;
+  margin:0 10px;
+  animation: dance 1s infinite alternate;
+}
+@keyframes dance{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-15px) rotate(-5deg);}
+  100%{transform:translateY(0) rotate(5deg);}
+}
+
+/* ================= Falling leaves ================= */
+.leaf{
+  position:absolute;
+  width:30px;
+  height:30px;
+  background-image: url('https://i.imgur.com/yu63h5S.png'); /* cherry blossom leaf */
+  background-size:contain;
+  background-repeat:no-repeat;
+  animation: fall linear infinite;
+  z-index:1;
+}
+@keyframes fall{
+  0% {transform: translateY(-50px) rotate(0deg);}
+  100% {transform: translateY(110vh) rotate(360deg);}
+}
+
+/* ================= Butterflies ================= */
+.butterfly{
+  position:absolute;
+  width:40px;
+  height:40px;
+  background-image:url('https://i.imgur.com/TZbOQcm.png'); /* butterfly */
+  background-size:contain;
+  background-repeat:no-repeat;
+  animation: fly linear infinite;
+  z-index:2;
+}
+@keyframes fly{
+  0%{transform: translate(0,0) rotate(0deg);}
+  50%{transform: translate(200px,50px) rotate(20deg);}
+  100%{transform: translate(-200px,100px) rotate(-20deg);}
+}
 
 </style>
 </head>
@@ -141,52 +141,68 @@ button:hover { background:#ff1493; }
 <!-- ================= PAGE 1 ================= -->
 <section id="page1">
   <div class="flowers"></div>
+  <h2>Choose one cat 💗</h2>
   <div class="cats">
-    <div class="cat small" onclick="gotoPage2()">🐱</div>
-    <div class="cat medium" onclick="gotoPage2()">🐱</div>
-    <div class="cat big" onclick="gotoPage2()">🐱</div>
+    <img src="https://i.imgur.com/5Y2hPce.png" class="cat" onclick="gotoPage2()">
+    <img src="https://i.imgur.com/5Y2hPce.png" class="cat" onclick="gotoPage2()">
+    <img src="https://i.imgur.com/5Y2hPce.png" class="cat" onclick="gotoPage2()">
   </div>
-  <p>Tap any cat 💗</p>
 </section>
 
 <!-- ================= PAGE 2 ================= -->
 <section id="page2">
-  <div class="stars"></div>
-  <p>🌙 Tere bina din adhoora hai…</p>
-  <p>Sorry if I hurt you 💗</p>
-  <button onclick="gotoPage3()">Next</button>
-</section>
-
-<!-- ================= PAGE 3 ================= -->
-<section id="page3">
-  <p>💗 Sorry & Thank You 💗</p>
-  <p>Hope you like this little surprise!</p>
+  <h1>I'm sorry 😔 forgive me</h1>
+  <button onclick="startMagic()">Click Me</button>
+  <div class="danceCats" style="display:none;">
+    <img src="https://i.imgur.com/5Y2hPce.png" class="danceCat">
+    <img src="https://i.imgur.com/5Y2hPce.png" class="danceCat">
+    <img src="https://i.imgur.com/5Y2hPce.png" class="danceCat">
+  </div>
 </section>
 
 <!-- ================= MUSIC ================= -->
-<audio id="music" loop>
+<audio id="song" loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6c0f6cfa49.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  // Music play on first tap
-  function playMusic() {
-    var audio = document.getElementById("music");
-    audio.play();
-    document.body.removeEventListener('click', playMusic);
-  }
-  document.body.addEventListener('click', playMusic);
+// PAGE NAVIGATION
+function gotoPage2(){
+  document.getElementById("page1").style.display="none";
+  document.getElementById("page2").style.display="flex";
+}
 
-  // Page navigation with fade effect
-  function gotoPage2() {
-    document.getElementById("page1").style.display="none";
-    document.getElementById("page2").style.display="flex";
+// MAGIC START ON BUTTON CLICK
+function startMagic(){
+  // play music
+  document.getElementById("song").play();
+
+  // hide button
+  document.querySelector("#page2 button").style.display="none";
+
+  // show dancing cats
+  document.querySelector(".danceCats").style.display="flex";
+
+  // create falling leaves
+  for(let i=0;i<20;i++){
+    let leaf = document.createElement("div");
+    leaf.classList.add("leaf");
+    leaf.style.left = Math.random()*100+"vw";
+    leaf.style.animationDuration = (3+Math.random()*3)+"s";
+    leaf.style.animationDelay = (Math.random()*2)+"s";
+    document.getElementById("page2").appendChild(leaf);
   }
 
-  function gotoPage3() {
-    document.getElementById("page2").style.display="none";
-    document.getElementById("page3").style.display="flex";
+  // create butterflies
+  for(let i=0;i<5;i++){
+    let butterfly = document.createElement("div");
+    butterfly.classList.add("butterfly");
+    butterfly.style.top = Math.random()*50+"vh";
+    butterfly.style.left = Math.random()*100+"vw";
+    butterfly.style.animationDuration = (4+Math.random()*3)+"s";
+    document.getElementById("page2").appendChild(butterfly);
   }
+}
 </script>
 
 </body>
