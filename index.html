@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,17 +6,13 @@
 <title>Sorry Surprise 💗</title>
 <style>
 body, html{
-  margin:0;
-  padding:0;
-  overflow:hidden;
-  font-family: 'Comic Sans MS', cursive;
+  margin:0; padding:0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x:hidden;
 }
-
-/* ================= PAGE 1 ================= */
-#page1 {
-  height:100vh;
-  width:100%;
-  background: #ffd6e8; /* light pink */
+/* Page styles */
+section{
+  height:100vh; width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -24,193 +20,152 @@ body, html{
   position:relative;
 }
 
-#page1 .flowers {
+/*---------- PAGE 1 ----------*/
+#page1{
+  background:#ffd6e8;
+}
+.flowers-emoji{
   position:absolute;
-  width:100%;
-  height:100%;
-  background-image: url('https://i.postimg.cc/dVqhYktz/flowers.png');
-  background-repeat:no-repeat;
-  background-position: top left, top right, bottom left, bottom right;
-  background-size: 100px 100px;
-  z-index:0;
-  opacity:0.3;
+  font-size:2.5em;
 }
+.top-left{top:10px; left:10px;}
+.top-right{top:10px; right:10px;}
+.bottom-left{bottom:10px; left:10px;}
+.bottom-right{bottom:10px; right:10px;}
 
-#page1 .cats {
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  z-index:2;
+.cats-row{
+  display:flex; justify-content:center;
 }
-
-.cat {
-  margin:0 15px;
-  width:100px;
+.cat-emoji{
+  font-size:4em; margin:0 15px;
   cursor:pointer;
-  transition: transform 0.3s;
+  transition:transform .3s;
 }
+.cat-emoji:hover{ transform:scale(1.4); }
 
-.cat:hover { transform:scale(1.2); }
-
-#page1 h2{
-  z-index:2;
-  margin-bottom:20px;
-}
-
-/* ================= PAGE 2 ================= */
-#page2 {
-  height:100vh;
-  width:100%;
-  background: #ffe4e1;
+/*---------- PAGE 2 ----------*/
+#page2{
+  background:#ffe4e1;
   display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  overflow:hidden;
-  position:relative;
   text-align:center;
 }
-
-#page2 h1 { font-size:2em; margin-bottom:20px; }
-#page2 button{
-  padding:10px 25px;
-  font-size:1em;
-  border:none;
-  border-radius:10px;
+#page2 h1{font-size:2em;}
+#forgiveBtn{
+  margin-top:25px;
+  padding:12px 28px;
+  font-size:1.1em;
   background:#ff69b4;
   color:white;
+  border:none;
+  border-radius:12px;
   cursor:pointer;
-  transition:0.3s;
 }
-#page2 button:hover{ background:#ff1493; }
+#forgiveBtn:hover{background:#ff1493;}
 
-/* ================= Dancing Cats ================= */
-.danceCats {
-  display:flex;
-  justify-content:center;
-  margin-top:20px;
+/* dancing + falling */
+.dance-row{
+  display:flex; justify-content:center;
+  margin-top:30px;
 }
-.danceCat{
-  width:100px;
-  margin:0 10px;
-  animation: dance 1s infinite alternate;
-  transform-origin: center bottom;
-}
-
+.dance-cat{font-size:3.5em; animation: dance 1s infinite alternate;}
 @keyframes dance{
-  0%{transform:translateY(0) rotate(0deg);}
-  25%{transform:translateY(-15px) rotate(5deg);}
-  50%{transform:translateY(0) rotate(-5deg);}
-  75%{transform:translateY(-10px) rotate(10deg);}
-  100%{transform:translateY(0) rotate(0deg);}
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+  100%{transform:translateY(0);}
 }
 
-/* ================= Falling leaves ================= */
-.leaf{
+.fall-emoji{
   position:absolute;
-  width:30px;
-  height:30px;
-  background-image: url('https://i.postimg.cc/50XjHz6m/leaf.png');
-  background-size:contain;
-  background-repeat:no-repeat;
-  animation: fall linear infinite;
-  z-index:1;
-  opacity:1;
+  font-size:1.8em;
+  animation: fall 4s linear infinite;
 }
-
 @keyframes fall{
-  0% {transform: translateY(-50px) rotate(0deg); opacity:1;}
-  50% {opacity:0.8;}
-  100% {transform: translateY(110vh) rotate(360deg); opacity:0;}
+  0%{transform:translateY(-50px);}
+  100%{transform:translateY(110vh);}
 }
 
-/* ================= Butterflies ================= */
-.butterfly{
-  position:absolute;
-  width:40px;
-  height:40px;
-  background-image:url('https://i.postimg.cc/4y0K6VZ9/butterfly.png');
-  background-size:contain;
-  background-repeat:no-repeat;
-  animation: fly linear infinite;
-  z-index:2;
+.fly-emoji{
+  position:absolute; font-size:2em;
+  animation: fly 6s infinite;
 }
-
 @keyframes fly{
-  0%{transform: translate(0,0) rotate(0deg);}
-  25%{transform: translate(150px,-50px) rotate(20deg);}
-  50%{transform: translate(-100px,80px) rotate(-20deg);}
-  75%{transform: translate(120px,50px) rotate(10deg);}
-  100%{transform: translate(0,0) rotate(0deg);}
+  0%{transform:translate(0,0);}
+  33%{transform:translate(120px,-40px);}
+  66%{transform:translate(-80px,70px);}
+  100%{transform:translate(0,0);}
 }
-
 </style>
 </head>
 <body>
 
-<!-- ================= PAGE 1 ================= -->
+<!-- PAGE 1 -->
 <section id="page1">
-  <div class="flowers"></div>
+  <div class="flowers-emoji top-left">🌸</div>
+  <div class="flowers-emoji top-right">🌼</div>
+  <div class="flowers-emoji bottom-left">🌺</div>
+  <div class="flowers-emoji bottom-right">🌷</div>
+
   <h2>Choose one cat 💗</h2>
-  <div class="cats">
-    <img src="https://i.postimg.cc/3x0z5GfK/cat.png" class="cat" onclick="gotoPage2()">
-    <img src="https://i.postimg.cc/3x0z5GfK/cat.png" class="cat" onclick="gotoPage2()">
-    <img src="https://i.postimg.cc/3x0z5GfK/cat.png" class="cat" onclick="gotoPage2()">
+  <div class="cats-row">
+    <div class="cat-emoji" onclick="gotoPage2()">🐈‍⬛</div>
+    <div class="cat-emoji" onclick="gotoPage2()">😺</div>
+    <div class="cat-emoji" onclick="gotoPage2()">😻</div>
   </div>
 </section>
 
-<!-- ================= PAGE 2 ================= -->
+<!-- PAGE 2 -->
 <section id="page2">
-  <h1>I'm sorry 😔 forgive me</h1>
-  <button onclick="startMagic()">Click Me</button>
-  <div class="danceCats" style="display:none;">
-    <img src="https://i.postimg.cc/3x0z5GfK/cat.png" class="danceCat">
-    <img src="https://i.postimg.cc/3x0z5GfK/cat.png" class="danceCat">
-    <img src="https://i.postimg.cc/3x0z5GfK/cat.png" class="danceCat">
+  <h1>I’m sorry 😔 forgive me</h1>
+  <button id="forgiveBtn" onclick="startMagic()">Click Me!</button>
+
+  <div class="dance-row" style="display:none;">
+    <div class="dance-cat">🐈‍⬛</div>
+    <div class="dance-cat">😺</div>
+    <div class="dance-cat">😻</div>
   </div>
 </section>
 
-<!-- ================= MUSIC ================= -->
-<audio id="song" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6c0f6cfa49.mp3" type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="music" loop>
+  <!-- default royalty-free soft music -->
+  <source src="https://cdn.pixabay.com/audio/2023/03/20/audio_ef68ae9bcb.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// PAGE NAVIGATION
 function gotoPage2(){
   document.getElementById("page1").style.display="none";
   document.getElementById("page2").style.display="flex";
 }
 
-// MAGIC START ON BUTTON CLICK
 function startMagic(){
-  let audio = document.getElementById("song");
-  audio.play();
+  // play music
+  document.getElementById("music").play();
 
   // hide button
-  document.querySelector("#page2 button").style.display="none";
+  document.getElementById("forgiveBtn").style.display="none";
 
   // show dancing cats
-  document.querySelector(".danceCats").style.display="flex";
+  document.querySelector(".dance-row").style.display="flex";
 
-  // falling leaves
-  for(let i=0;i<25;i++){
-    let leaf = document.createElement("div");
-    leaf.classList.add("leaf");
-    leaf.style.left = Math.random()*100+"vw";
-    leaf.style.animationDuration = (3+Math.random()*3)+"s";
-    leaf.style.animationDelay = (Math.random()*2)+"s";
-    document.getElementById("page2").appendChild(leaf);
+  // falling emojis (flowers/leaves)
+  for(let i=0;i<15;i++){
+    let f = document.createElement("div");
+    f.className="fall-emoji";
+    f.style.left=Math.random()*100+"vw";
+    f.textContent = ["🍃","🍂","🌸"][Math.floor(Math.random()*3)];
+    f.style.animationDuration = (3+Math.random()*3)+"s";
+    document.getElementById("page2").appendChild(f);
   }
 
   // butterflies
-  for(let i=0;i<7;i++){
-    let butterfly = document.createElement("div");
-    butterfly.classList.add("butterfly");
-    butterfly.style.top = Math.random()*60+"vh";
-    butterfly.style.left = Math.random()*100+"vw";
-    butterfly.style.animationDuration = (4+Math.random()*3)+"s";
-    document.getElementById("page2").appendChild(butterfly);
+  for(let i=0;i<6;i++){
+    let b = document.createElement("div");
+    b.className="fly-emoji";
+    b.style.top=Math.random()*70+"vh";
+    b.style.left=Math.random()*100+"vw";
+    b.textContent = "🦋";
+    b.style.animationDuration=(4+Math.random()*3)+"s";
+    document.getElementById("page2").appendChild(b);
   }
 }
 </script>
