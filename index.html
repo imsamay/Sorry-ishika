@@ -2,108 +2,190 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>I'm Sorry</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Surprise 💗</title>
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Comic Sans MS', cursive;
-    overflow: hidden;
-  }
+body, html {
+  margin:0;
+  padding:0;
+  font-family: 'Comic Sans MS', cursive;
+  overflow-x:hidden;
+}
 
-  .flowers {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url("https://i.imgur.com/7QpG6pG.png");
-    background-size: cover;
-    opacity: 0.15;
-  }
+section {
+  height:100vh;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  transition: all 0.8s ease;
+  position:relative;
+}
 
-  .card {
-    background: white;
-    padding: 30px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: pop 1.5s ease;
-    z-index: 2;
-  }
+/* ================= PAGE 1 ================= */
+#page1 {
+  background: linear-gradient(#ffc0cb, #ffb6c1);
+  overflow:hidden;
+}
 
-  @keyframes pop {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
+#page1 .flowers {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-image:url("https://i.imgur.com/7QpG6pG.png");
+  background-size:cover;
+  opacity:0.2;
+  z-index:0;
+}
 
-  .cat {
-    font-size: 80px;
-    animation: bounce 1.5s infinite;
-  }
+#page1 .cats {
+  display:flex;
+  z-index:2;
+  cursor:pointer;
+}
 
-  @keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-  }
+.cat {
+  margin:15px;
+  transition: transform 0.5s ease;
+  animation: jump 1.5s infinite alternate;
+}
 
-  h1 {
-    color: #ff69b4;
-    margin: 10px 0;
-  }
+.cat:hover { transform:scale(1.3); }
 
-  p {
-    font-size: 18px;
-    color: #444;
-  }
+@keyframes jump {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
 
-  button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background: #ff69b4;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.small { font-size:50px; }
+.medium { font-size:80px; }
+.big { font-size:110px; }
 
-  button:hover {
-    background: #ff1493;
-  }
+#page1 p { z-index:2; margin-top:20px; font-size:1.2em; }
+
+/* ================= PAGE 2 ================= */
+#page2 {
+  background: radial-gradient(circle at top, #1b2735, #090a0f);
+  color:white;
+  font-size:1.8em;
+  text-align:center;
+  padding:20px;
+  display:none;
+  overflow:hidden;
+}
+
+#page2 .stars {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-image: url("https://i.imgur.com/ya9YdRL.png");
+  background-size:cover;
+  opacity:0.2;
+  z-index:0;
+  animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity:0.1; }
+  50% { opacity:0.3; }
+  100% { opacity:0.1; }
+}
+
+#page2 p {
+  opacity:0;
+  animation: fadein 2s forwards;
+}
+
+#page2 p:nth-child(1) { animation-delay:0.5s; }
+#page2 p:nth-child(2) { animation-delay:2s; }
+
+@keyframes fadein {
+  to { opacity:1; }
+}
+
+/* ================= PAGE 3 ================= */
+#page3 {
+  background: linear-gradient(#ffe4e1, #ffcccb);
+  text-align:center;
+  font-size:2em;
+  color:#333;
+  display:none;
+  animation: fadepage 1s;
+}
+
+@keyframes fadepage {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+/* ================= BUTTONS ================= */
+button {
+  margin-top:30px;
+  padding:10px 25px;
+  font-size:1em;
+  border:none;
+  border-radius:10px;
+  background:#ff69b4;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover { background:#ff1493; }
+
 </style>
 </head>
-
 <body>
 
-<div class="flowers"></div>
+<!-- ================= PAGE 1 ================= -->
+<section id="page1">
+  <div class="flowers"></div>
+  <div class="cats">
+    <div class="cat small" onclick="gotoPage2()">🐱</div>
+    <div class="cat medium" onclick="gotoPage2()">🐱</div>
+    <div class="cat big" onclick="gotoPage2()">🐱</div>
+  </div>
+  <p>Tap any cat 💗</p>
+</section>
 
-<div class="card">
-  <div class="cat">🐱</div>
+<!-- ================= PAGE 2 ================= -->
+<section id="page2">
+  <div class="stars"></div>
+  <p>🌙 Tere bina din adhoora hai…</p>
+  <p>Sorry if I hurt you 💗</p>
+  <button onclick="gotoPage3()">Next</button>
+</section>
 
-  <h1>I'm Sorry 💗</h1>
+<!-- ================= PAGE 3 ================= -->
+<section id="page3">
+  <p>💗 Sorry & Thank You 💗</p>
+  <p>Hope you like this little surprise!</p>
+</section>
 
-  <p>
-    <!-- 👇👇👇 YAHAN MESSAGE CHANGE KARNA 👇👇👇 -->
-    Mujhse galti ho gayi…  
-    lekin dil se kabhi bura nahi chaha.  
-    Agar thoda sa bhi gussa kam ho sakta ho,  
-    toh please mujhe maaf kar dena 🌸
-  </p>
-
-  <button onclick="playSound()">Forgive Me 🥺</button>
-</div>
-
-<audio id="music">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<!-- ================= MUSIC ================= -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6c0f6cfa49.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  function playSound() {
-    document.getElementById("music").play();
+  // Music play on first tap
+  function playMusic() {
+    var audio = document.getElementById("music");
+    audio.play();
+    document.body.removeEventListener('click', playMusic);
+  }
+  document.body.addEventListener('click', playMusic);
+
+  // Page navigation with fade effect
+  function gotoPage2() {
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="flex";
+  }
+
+  function gotoPage3() {
+    document.getElementById("page2").style.display="none";
+    document.getElementById("page3").style.display="flex";
   }
 </script>
 
