@@ -6,10 +6,9 @@
 <title>Sorry Surprise 💗</title>
 <style>
 body, html{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',sans-serif;}
-
 section{height:100vh;width:100%;display:flex;justify-content:center;align-items:center;flex-direction:column;position:relative;text-align:center;}
 
-/* --- PAGE 1 --- */
+/* ---------- PAGE 1 ---------- */
 #page1{background:#ffd6e8;}
 .flowers-emoji{position:absolute;font-size:2.5em;}
 .top-left{top:10px;left:10px;}
@@ -21,8 +20,10 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 .cat-emoji{font-size:4em;margin:0 15px;cursor:pointer;transition:transform .3s;}
 .cat-emoji:hover{transform:scale(1.4);}
 
-/* --- PAGE 2 --- */
+/* ---------- PAGE 2 ---------- */
 #page2{background:#ffe4e1;display:none;overflow:hidden;}
+#thanksMsg{font-size:2em;margin-top:25px;color:#333;display:none;}
+#sorryMsg{font-size:2em;margin-top:15px;color:#333;}
 
 /* button */
 #forgiveBtn{margin-top:20px;padding:12px 28px;font-size:1.1em;background:#ff69b4;color:white;border:none;border-radius:10px;cursor:pointer;transition:0.3s;}
@@ -40,9 +41,6 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 /* butterflies */
 .fly-emoji{position:absolute;font-size:2em;animation:fly 6s infinite;}
 @keyframes fly{0%{transform:translate(0,0);}33%{transform:translate(120px,-40px);}66%{transform:translate(-80px,70px);}100%{transform:translate(0,0);}}
-
-/* Thank you message */
-#thanksMsg{font-size:2em;margin-top:25px;color:#333;}
 </style>
 </head>
 <body>
@@ -64,7 +62,7 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
 
 <!-- PAGE 2 -->
 <section id="page2">
-  <h1>I'm sorry 😔 forgive me</h1>
+  <div id="sorryMsg">I'm sorry 😔❤️😻</div>
   <button id="forgiveBtn" onclick="startMagic()">Click Me!</button>
 
   <div class="dance-row" style="display:none;">
@@ -73,35 +71,30 @@ section{height:100vh;width:100%;display:flex;justify-content:center;align-items:
     <div class="dance-cat">😻</div>
   </div>
 
-  <!-- YouTube embed (hidden initially) -->
-  <div id="videoDiv" style="margin-top:25px;display:none;width:80%;">
-    <!-- YouTube player will be inserted here -->
-  </div>
-
-  <!-- Final thank you message -->
-  <div id="thanksMsg" style="display:none;">Thankyou ❤️</div>
+  <div id="thanksMsg">Thankyou ❤️</div>
 </section>
 
+<!-- MUSIC -->
+<audio id="music" loop autoplay>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6c0f6cfa49.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-// page switch
 function gotoPage2(){
   document.getElementById("page1").style.display="none";
   document.getElementById("page2").style.display="flex";
 }
 
-// start everything
 function startMagic(){
   document.getElementById("forgiveBtn").style.display="none";
 
-  // embed and autoplay YouTube instrumental
-  document.getElementById("videoDiv").innerHTML = 
-    '<iframe width="100%" height="200" src="https://www.youtube.com/embed/PBoKoDu6-5I?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
-  document.getElementById("videoDiv").style.display="block";
+  // hide sorry message after showing once
+  setTimeout(()=>{ document.getElementById("sorryMsg").style.display="none"; }, 1500);
 
   // show dancing cats
   document.querySelector(".dance-row").style.display="flex";
 
-  // falling blossoms
+  // falling emojis
   for(let i=0;i<15;i++){
     let f = document.createElement("div");
     f.className="fall-emoji";
@@ -116,11 +109,12 @@ function startMagic(){
     b.className="fly-emoji";
     b.style.top=Math.random()*60+"vh";
     b.style.left=Math.random()*100+"vw";
+    b.textContent = "🦋";
     document.getElementById("page2").appendChild(b);
   }
-  
+
   // show thank you after short delay
-  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; }, 3000);
+  setTimeout(()=>{ document.getElementById("thanksMsg").style.display="block"; }, 2000);
 }
 </script>
 
