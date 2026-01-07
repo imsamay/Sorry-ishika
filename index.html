@@ -1,50 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Sorry 😼</title>
 <style>
-body{margin:0;font-family:Comic Sans MS;overflow:hidden}
-.page{display:none;height:100vh;width:100vw;justify-content:center;align-items:center;flex-direction:column;text-align:center}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Comic Sans MS;
+  overflow:hidden;
+}
+.page{
+  display:none;
+  height:100vh;
+  width:100vw;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
 
 /* PAGE 1 */
-#p1{display:flex;background:#ffd6e9}
-.cat{font-size:4em;margin:20px;cursor:pointer}
-.flower{position:absolute;font-size:1.5em}
+#p1{
+  display:flex;
+  background:#ffd6e9;
+}
+.pet{
+  font-size:4.8em;
+  margin:20px;
+  cursor:pointer;
+}
 
 /* PAGE 2 */
-#p2{background:#ffb6d9;display:flex}
+#p2{
+  display:flex;
+  background:#ffb6d9;
+}
+#clickBtn{
+  padding:18px 42px;
+  font-size:1.3em;
+  border:none;
+  border-radius:35px;
+  background:linear-gradient(135deg,#ff69b4,#ff9acb);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+  transition:.3s;
+}
+#clickBtn:hover{
+  transform:scale(1.1);
+}
 
 /* PAGE 3 */
-#p3{background:#050514;color:white;display:flex}
-.star{position:absolute;color:white;font-size:6px}
-.moon{font-size:4em;margin-bottom:20px}
+#p3{
+  display:flex;
+  background:#050514;
+  color:white;
+  padding:25px;
+}
+.star{
+  position:absolute;
+  color:white;
+  font-size:6px;
+}
+.moon{
+  font-size:4em;
+  margin-bottom:20px;
+}
 
 /* OVERLAY */
 #overlay{
- display:none;position:fixed;inset:0;
- background:rgba(0,0,0,.4);
- backdrop-filter:blur(6px);z-index:10
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(6px);
+  z-index:10;
 }
 #finalBtn{
- position:absolute;left:50%;top:50%;
- transform:translate(-50%,-50%);
- padding:18px 35px;font-size:1.3em;
- background:#ff69b4;color:white;border:none;
- border-radius:20px
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  padding:18px 35px;
+  font-size:1.3em;
+  background:#ff69b4;
+  color:white;
+  border:none;
+  border-radius:22px;
 }
+
+/* SPINNER */
 #spinner{
- display:none;width:50px;height:50px;
- border:6px solid #ccc;border-top:6px solid pink;
- border-radius:50%;animation:spin 1s linear infinite;
- margin-top:20px
+  display:none;
+  width:50px;
+  height:50px;
+  border:6px solid #ccc;
+  border-top:6px solid pink;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-top:20px;
 }
-@keyframes spin{100%{transform:rotate(360deg)}}
+@keyframes spin{
+  100%{transform:rotate(360deg)}
+}
 
 /* FINAL PAGE */
-#p4{background:#ffe6f0;display:flex}
-.rose{position:absolute;font-size:1.6em;animation:fall 5s linear infinite}
-@keyframes fall{0%{top:-10%}100%{top:110%}}
+#p4{
+  display:flex;
+  background:#ffe6f0;
+}
+.rose{
+  position:absolute;
+  font-size:1.6em;
+  animation:fall 5s linear infinite;
+}
+@keyframes fall{
+  0%{top:-10%}
+  100%{top:110%}
+}
 </style>
 </head>
 
@@ -52,85 +126,95 @@ body{margin:0;font-family:Comic Sans MS;overflow:hidden}
 
 <!-- PAGE 1 -->
 <section id="p1" class="page">
-<h2>Choose one cat 😻</h2>
-<div>
-<span class="cat" onclick="goSorry()">🐱</span>
-<span class="cat" onclick="goSorry()">🐈</span>
-<span class="cat" onclick="goSorry()">😺</span>
-</div>
+  <h2>Choose one 😻</h2>
+  <div>
+    <span class="pet" onclick="choose(1)">🐱</span>
+    <span class="pet" onclick="choose(2)">🐶</span>
+    <span class="pet" onclick="choose(3)">🐰</span>
+  </div>
 </section>
 
 <!-- PAGE 2 -->
 <section id="p2" class="page">
-<h2>I’m sorry 😔</h2>
-<button onclick="goMsg()">Click me</button>
+  <h2>I’m sorry 😔💗🐾</h2>
+  <button id="clickBtn" onclick="goMsg()">Click me 💌</button>
 </section>
 
 <!-- PAGE 3 -->
 <section id="p3" class="page">
-<div class="moon">🌕</div>
-
-<p>How strange, billions of faces in this world 🌍,<br>
-it is only your eyes I searched for… 🤍</p><br>
-
-<p>Let me tell you, you are the fire I would reach for,<br>
-without fear of being burned ✨</p><br>
-
-<p>In the sky crowded with stars,<br>
-you remain the only moon I see… 😅🤍</p>
-
-<button onclick="showFinal()">Ready for final click 😼</button>
+  <div class="moon">🌕</div>
+  <p id="msgText"></p>
+  <br>
+  <button onclick="showFinal()">Ready for final click 😼</button>
 </section>
 
 <!-- OVERLAY -->
 <div id="overlay">
-<button id="finalBtn" onclick="moveBtn()">Final click 😼</button>
-<div id="spinner"></div>
-<div id="hehe" style="display:none;color:white;font-size:1.5em">hehe 😂</div>
+  <button id="finalBtn" onclick="moveBtn()">Final click 😼</button>
+  <div id="spinner"></div>
+  <div id="hehe" style="display:none;color:white;font-size:1.5em">hehe 😂</div>
 </div>
 
 <!-- FINAL PAGE -->
 <section id="p4" class="page">
-<h1>Chal nikal yaha se,<br> hawa aane de 😂🌸</h1>
+  <h1>Chal nikal yaha se,<br> hawa aane de 😂🌸</h1>
 </section>
 
 <script>
-let c=0;
+let selected=0, clicks=0;
 
-function goSorry(){p1.style.display="none";p2.style.display="flex"}
-function goMsg(){
- p2.style.display="none";p3.style.display="flex";
- for(let i=0;i<35;i++){
-  let s=document.createElement("div");
-  s.className="star";s.textContent="✦";
-  s.style.left=Math.random()*100+"vw";
-  s.style.top=Math.random()*100+"vh";
-  p3.appendChild(s);
- }
+const messages={
+  1:"How strange, billions of faces in this world 🌍,<br>it is only your eyes I searched for… 🤍",
+  2:"Let me tell you, you are the fire I would reach for,<br>without fear of being burned ✨",
+  3:"In the sky crowded with stars,<br>you remain the only moon I see… 😅🤍"
+};
+
+function choose(n){
+  selected=n;
+  p1.style.display="none";
+  p2.style.display="flex";
 }
-function showFinal(){overlay.style.display="block"}
+
+function goMsg(){
+  p2.style.display="none";
+  p3.style.display="flex";
+  msgText.innerHTML=messages[selected];
+
+  for(let i=0;i<30;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.textContent="✦";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    p3.appendChild(s);
+  }
+}
+
+function showFinal(){
+  overlay.style.display="block";
+}
 
 function moveBtn(){
- c++;
- if(c==1) finalBtn.style.top="15%";
- else if(c==2) finalBtn.style.top="80%";
- else if(c==3){
-  spinner.style.display="block";
-  hehe.style.display="block";
-  setTimeout(()=>spinner.style.display="none",1500);
- }
- else{
-  overlay.style.display="none";
-  p3.style.display="none";
-  p4.style.display="flex";
-  for(let i=0;i<20;i++){
-   let r=document.createElement("div");
-   r.className="rose";
-   r.textContent=["🌸","🌹","💐"][Math.floor(Math.random()*3)];
-   r.style.left=Math.random()*100+"vw";
-   p4.appendChild(r);
+  clicks++;
+  if(clicks===1) finalBtn.style.top="15%";
+  else if(clicks===2) finalBtn.style.top="80%";
+  else if(clicks===3){
+    spinner.style.display="block";
+    hehe.style.display="block";
+    setTimeout(()=>spinner.style.display="none",1500);
+  }else{
+    overlay.style.display="none";
+    p3.style.display="none";
+    p4.style.display="flex";
+
+    for(let i=0;i<20;i++){
+      let r=document.createElement("div");
+      r.className="rose";
+      r.textContent=["🌸","🌹","💐"][Math.floor(Math.random()*3)];
+      r.style.left=Math.random()*100+"vw";
+      p4.appendChild(r);
+    }
   }
- }
 }
 </script>
 
