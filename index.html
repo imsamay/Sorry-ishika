@@ -2,132 +2,184 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You 😻</title>
+<title>Just For You 😼</title>
 <style>
 body{
   margin:0;
-  font-family:'Comic Sans MS',cursive;
-  background:#ffd6e8;
+  font-family:'Comic Sans MS', cursive;
   overflow:hidden;
 }
 
-/* BUTTON OVERLAY */
-#overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(6px);
-  display:flex;
+/* ---------- COMMON ---------- */
+.page{
+  display:none;
+  height:100vh;
+  width:100vw;
   justify-content:center;
   align-items:center;
-  z-index:10;
+  flex-direction:column;
+  text-align:center;
 }
-
-#finalBtn{
-  position:absolute;
-  padding:25px 40px;
-  font-size:1.5em;
+button{
+  padding:15px 30px;
+  font-size:1.2em;
   border:none;
-  border-radius:25px;
+  border-radius:20px;
   background:#ff69b4;
   color:white;
   cursor:pointer;
-  transition:all .5s ease;
 }
 
-/* SPINNER */
+/* ---------- PAGE 1 ---------- */
+#page1{
+  display:flex;
+  background:#ffd6eb;
+}
+.cat{
+  font-size:4em;
+  margin:20px;
+  cursor:pointer;
+}
+
+/* ---------- PAGE 2 ---------- */
+#page2{
+  background:#1b1b2f;
+  color:white;
+}
+.star{
+  position:absolute;
+  color:white;
+  font-size:8px;
+}
+.moon{
+  font-size:5em;
+  margin-bottom:20px;
+}
+
+/* ---------- OVERLAY ---------- */
+#overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(6px);
+  z-index:10;
+}
+#finalBtn{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* ---------- SPINNER ---------- */
 #spinner{
   display:none;
-  flex-direction:column;
-  align-items:center;
-  color:white;
-  font-size:1.3em;
-}
-
-.loader{
-  width:50px;
-  height:50px;
-  border:6px solid #fff;
-  border-top:6px solid transparent;
+  width:60px;
+  height:60px;
+  border:6px solid #ccc;
+  border-top:6px solid pink;
   border-radius:50%;
   animation:spin 1s linear infinite;
-  margin-bottom:10px;
+  margin:20px auto;
 }
-
 @keyframes spin{
   100%{transform:rotate(360deg);}
 }
 
-/* FINAL PAGE */
+/* ---------- FINAL PAGE ---------- */
 #finalPage{
-  display:none;
-  height:100vh;
-  background:linear-gradient(#ffe6f2,#fff0f7);
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  font-size:2em;
-  position:relative;
+  background:#ffe6f0;
+  display:flex;
 }
-
-/* ROSES */
 .rose{
   position:absolute;
-  top:-10%;
-  font-size:2em;
+  font-size:1.5em;
   animation:fall 5s linear infinite;
 }
-
 @keyframes fall{
-  to{
-    transform:translateY(120vh) rotate(360deg);
-  }
+  0%{top:-10%; opacity:1;}
+  100%{top:110%; opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
+<!-- PAGE 1 -->
+<section id="page1" class="page">
+  <h2>Choose one cat 😻</h2>
+  <div>
+    <span class="cat" onclick="openSorry()">🐱</span>
+    <span class="cat" onclick="openSorry()">🐈</span>
+    <span class="cat" onclick="openSorry()">😺</span>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section id="page2" class="page">
+  <div class="moon">🌕</div>
+  <h2>I’m sorry 😔</h2>
+  <button onclick="openFinal()">Click me</button>
+</section>
+
+<!-- OVERLAY -->
 <div id="overlay">
   <button id="finalBtn" onclick="moveBtn()">Ready for final click 😼</button>
-
-  <div id="spinner">
-    <div class="loader"></div>
-    hehe 😼
-  </div>
+  <div id="spinner"></div>
+  <div id="hehe" style="display:none;color:white;font-size:1.5em;">hehe 😼</div>
 </div>
 
-<div id="finalPage">
-  <div>
-    Chal nikal ab yaha se,<br>
-    hawa aane de 😂🌹
-  </div>
-</div>
+<!-- FINAL PAGE -->
+<section id="finalPage" class="page">
+  <h1>Chal nikal ab yaha se,<br> hawa aane de 😂🌸🌹</h1>
+</section>
 
 <script>
-let count = 0;
-const btn = document.getElementById("finalBtn");
-const spinner = document.getElementById("spinner");
-const overlay = document.getElementById("overlay");
-const finalPage = document.getElementById("finalPage");
+let clickCount=0;
+
+function openSorry(){
+  page1.style.display="none";
+  page2.style.display="flex";
+  createStars();
+}
+
+function openFinal(){
+  overlay.style.display="block";
+}
 
 function moveBtn(){
-  count++;
+  clickCount++;
 
-  if(count === 1){
-    btn.style.top = "10%";
+  if(clickCount===1){
+    finalBtn.style.top="10%";
   }
-  else if(count === 2){
-    btn.style.top = "80%";
+  else if(clickCount===2){
+    finalBtn.style.top="80%";
   }
-  else if(count === 3){
-    btn.style.display="none";
-    spinner.style.display="flex";
+  else if(clickCount===3){
+    spinner.style.display="block";
+    hehe.style.display="block";
+    setTimeout(()=>{
+      spinner.style.display="none";
+    },1500);
   }
   else{
     overlay.style.display="none";
+    page2.style.display="none";
     finalPage.style.display="flex";
     dropRoses();
+  }
+}
+
+function createStars(){
+  for(let i=0;i<40;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    s.textContent="✦";
+    page2.appendChild(s);
   }
 }
 
@@ -137,7 +189,6 @@ function dropRoses(){
     r.className="rose";
     r.textContent=["🌹","🌸","💐"][Math.floor(Math.random()*3)];
     r.style.left=Math.random()*100+"vw";
-    r.style.animationDuration=(3+Math.random()*3)+"s";
     finalPage.appendChild(r);
   }
 }
